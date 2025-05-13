@@ -13,7 +13,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Banner = () => {
     return (
-        <div className='w-[85%]  rounded-2xl overflow-hidden mt-8 mx-auto ' >
+        <div className='w-[90%]  rounded-2xl overflow-hidden mt-8 mx-auto ' >
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}

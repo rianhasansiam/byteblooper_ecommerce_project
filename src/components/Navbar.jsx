@@ -57,7 +57,7 @@ const Navbar = () => {
           </form>
 
      <div className="  flex gap-8 text-2xl items-center ">
-    <Link to="/"  className='block '><i className="fa-solid fa-heart"></i></Link>
+    {/* <Link to="/"  className='block '><i className="fa-solid fa-heart"></i></Link> */}
     <Link to="/" className='block '><i className="fa-solid fa-cart-shopping"></i></Link>
   
 </div>

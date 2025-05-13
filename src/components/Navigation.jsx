@@ -14,7 +14,7 @@ const Navigation = () => {
   };
 
   return (
-    <div className="w-[20%] h-full bg-white  p-6 overflow-y-auto  sticky top-0  ">
+    <div className="w-[18%] h-full bg-white  p-6 overflow-y-auto  sticky top-0 ">
       <ul className="space-y-10 text-gray-800  ">
 
 
@@ -93,13 +93,12 @@ const Navigation = () => {
         {/* Static Links */}
         {[
           { label: 'Brands', path: '/brands' },
-          { label: 'Top Curations', path: '/curations' },
+         
           { label: 'Orders', path: '/orders' },
-          { label: 'Rewards', path: '/rewards' },
+      
           { label: 'Wishlist', path: '/wishlist' },
-          { label: 'Become a Seller', path: '/seller' },
-          { label: 'Blogs', path: '/blogs' },
-          { label: 'Help Center', path: '/help' },
+   
+        
         ].map((item, idx) => (
           <li key={idx}>
             <Link to={item.path} className="block font-medium hover:text-blue-600 transition">
@@ -109,7 +108,7 @@ const Navigation = () => {
         ))}
 
         <li>
-          <Link to="/login" className="block font-medium  hover:underline">Sign In / Register</Link>
+          <Link to="/login" className="block font-medium  hover:underline">Sign In</Link>
         </li>
       </ul>
     </div>

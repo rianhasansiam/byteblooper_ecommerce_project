@@ -83,7 +83,7 @@ const WomenCategoriesCarousel = () => {
                 <img 
                   src={category.image} 
                   alt={category.name}
-                  className=" w-28 h-28 rounded-full mx-auto" 
+                  className=" w-28 h-28 rounded-full mx-auto object-cover" 
                 />
                 
 <div className=" text-center   flex flex-col justify-end p-4">
@@ -120,7 +120,7 @@ const WomenCategoriesCarousel = () => {
         </div>
 
         {/* Dots indicator (optional) */}
-        <div className="flex justify-center mt-6 space-x-2">
+        {/* <div className="flex justify-center mt-6 space-x-2">
           {Array.from({ length: Math.ceil(categories.length / itemsPerPage) }).map((_, index) => (
             <button
               key={index}
@@ -129,7 +129,7 @@ const WomenCategoriesCarousel = () => {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

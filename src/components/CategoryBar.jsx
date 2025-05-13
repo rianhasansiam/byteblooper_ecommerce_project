@@ -1,74 +1,68 @@
 import React, { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-const MensFashionCarousel = () => {
+const CategoryBar = () => {
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
   const categories = [
+   
     { 
-      name: "Unstitched", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Premium fabrics for custom tailoring"
+      name: "Women", 
+     picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
     },
     { 
-      name: "Men Festive", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Elegant outfits for celebrations"
+      name: "Men", 
+     picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
     },
     { 
-      name: "Men Luxury", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "High-end premium collections"
+      name: "Kids", 
+    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
     },
     { 
-      name: "Men Kurta", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Traditional and contemporary styles"
+      name: "Boys", 
+    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
     },
     { 
-      name: "Western", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Modern western attire"
+      name: "Girls", 
+    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
     },
-    { 
-      name: "Boy Eastern", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Traditional wear for boys"
-    },
-    { 
-      name: "Boy Western", 
-      image: "https://i.ibb.co/b5Fv87Md/images-1.jpg",
-      description: "Casual western outfits"
-    }
+    
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 4;
+   
+ 
+   const [currentIndex, setCurrentIndex] = useState(0);
+   const itemsPerPage = 4; // Show 4 items at a time
+ 
+   const nextSlide = () => {
+     setCurrentIndex((prevIndex) => 
+       prevIndex + itemsPerPage >= categories.length ? 0 : prevIndex + 1
+     );
+   };
+ 
+   const prevSlide = () => {
+     setCurrentIndex((prevIndex) => 
+       prevIndex === 0 ? categories.length - itemsPerPage : prevIndex - 1
+     );
+   };
+ 
+   // Get current items to display
+   const visibleCategories = categories.slice(
+     currentIndex, 
+     Math.min(currentIndex + itemsPerPage, categories.length)
+   );
+ 
+   // If we're at the end and don't have enough items, take from beginning
+   const remainingItems = itemsPerPage - visibleCategories.length;
+   if (remainingItems > 0) {
+     visibleCategories.push(...categories.slice(0, remainingItems));
+   }
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + itemsPerPage >= categories.length ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? categories.length - itemsPerPage : prevIndex - 1
-    );
-  };
-
-  const visibleCategories = categories.slice(
-    currentIndex,
-    Math.min(currentIndex + itemsPerPage, categories.length)
-  );
-
-  const remainingItems = itemsPerPage - visibleCategories.length;
-  if (remainingItems > 0) {
-    visibleCategories.push(...categories.slice(0, remainingItems));
-  }
 
   return (
-    <div className="relative bg-white py-6 px-4 sm:px-6 lg:px-8">
+     <div className="relative bg-white py-6 mt-10 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-gray-900">Men's Collections</h2>
+            <h2 className="text-2xl font-bold mb-8 text-gray-900">All Category</h2>
             
             <div className="relative group">
               {/* Carousel container */}
@@ -79,7 +73,7 @@ const MensFashionCarousel = () => {
                     className=" transition-all duration-300 "
                   >
                     <img 
-                      src={category.image} 
+                      src={category.picture} 
                       alt={category.name}
                       className=" w-28 h-28 rounded-full mx-auto object-cover" 
                     />
@@ -133,4 +127,4 @@ const MensFashionCarousel = () => {
   );
 };
 
-export default MensFashionCarousel;
+export default CategoryBar;

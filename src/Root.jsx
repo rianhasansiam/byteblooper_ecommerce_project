@@ -14,6 +14,7 @@ import NewArrivals from "./pages/NewArrivals";
 import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
 import Brands from "./pages/Brands";
+import AddToCart from "./pages/addtoCart/AddtoCart";
 
 
 
@@ -82,6 +83,10 @@ const Root = createBrowserRouter([
        {
         path: '/brands',
         element: <Brands></Brands>
+      },
+       {
+        path: '/addto-cart',
+        element: <AddToCart></AddToCart>
       },
       
       

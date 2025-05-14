@@ -8,19 +8,21 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
     setProductQuantities(quantity || 1);
   }, [quantity]);
 
-  // Update parent on quantity change
-  useEffect(() => {
-    if (onQuantityChange) {
-      onQuantityChange(item._id, productQuantities);
-    }
-  }, [productQuantities]);
-
-  const incresingQuantity = () => {
+  const increasingQuantity = () => {
     setProductQuantities((prev) => prev + 1);
   };
+
   const decreasingQuantity = () => {
     setProductQuantities((prev) => Math.max(1, prev - 1));
   };
+
+  // Notify parent about quantity change
+  useEffect(() => {
+    if (onQuantityChange && item?._id) {
+      onQuantityChange(item._id, productQuantities);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productQuantities]);
 
   return (
     <div className="py-6 flex flex-col sm:flex-row">
@@ -36,7 +38,7 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
           <div>
             <h3 className="text-lg font-medium text-gray-900">{item.name}</h3>
             <p className="text-gray-500 text-sm">{item.shortDescription}</p>
-            {item.availableAmount && (
+            {item.availableAmount !== undefined && (
               <div className="mt-2 text-sm text-gray-600">
                 Available: {item.availableAmount}
               </div>
@@ -45,6 +47,8 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
           <button
             className="text-gray-400 hover:text-red-500"
             onClick={onDelete}
+            type="button"
+            aria-label="Remove item"
           >
             <XMarkIcon className="h-5 w-5" />
           </button>
@@ -55,6 +59,9 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
             <button
               onClick={decreasingQuantity}
               className="border border-gray-300 rounded-l-md px-3 py-1"
+              type="button"
+              disabled={productQuantities <= 1}
+              aria-label="Decrease quantity"
             >
               -
             </button>
@@ -62,15 +69,17 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
               {productQuantities}
             </span>
             <button
-              onClick={incresingQuantity}
+              onClick={increasingQuantity}
               className="border border-gray-300 rounded-r-md px-3 py-1"
+              type="button"
+              aria-label="Increase quantity"
             >
               +
             </button>
           </div>
           <div className="flex items-center">
             <span className="text-lg font-bold">
-              ${(item.price * productQuantities).toFixed(2)}
+              ${((Number(item.price) || 0) * productQuantities).toFixed(2)}
             </span>
           </div>
         </div>

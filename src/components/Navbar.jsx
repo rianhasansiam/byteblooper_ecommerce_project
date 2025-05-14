@@ -28,7 +28,7 @@ const Navbar = () => {
             <Link to="/" className="text-3xl font-bold text-gray-800">
               LAM
             </Link>
-    <Link to="/" className='block  text-3xl mr-3 lg:hidden'><i className="fa-solid fa-bag-shopping"></i></Link>
+    <Link to="/addto-cart" className='block  text-3xl mr-3 lg:hidden'><i className="fa-solid fa-bag-shopping"></i></Link>
           </div>
 
          
@@ -69,7 +69,7 @@ const Navbar = () => {
 
      <div className=" hidden  lg:flex gap-8 text-2xl items-center ">
     {/* <Link to="/"  className='block '><i className="fa-solid fa-heart"></i></Link> */}
-    <Link to="/" className='block '><i className="fa-solid fa-bag-shopping"></i></Link>
+    <Link to="/addto-cart" className='block '><i className="fa-solid fa-bag-shopping"></i></Link>
   
 </div>
            

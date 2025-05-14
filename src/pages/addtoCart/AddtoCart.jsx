@@ -1,39 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
-import { contextData } from "../Contex";
-import { useFetchData } from "../hooks/useFetchData";
-import { ArrowLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import CardAddtocart from "./CardAddtocart";
 
-import { useDeleteData } from "../hooks/useDeleteData";
-import CardAddtocart from "./cardAddtocart";
+// Dummy data to simulate items in localStorage
+const dummyProduct = {
+  _id: "1",
+  name: "Classic Wooden Chair",
+  shortDescription: "Ergonomic and stylish wooden chair",
+  price: 49.99,
+  image: "https://via.placeholder.com/150",
+  availableAmount: 10,
+  quantity: 1
+};
 
 const AddToCart = () => {
-  const { userData } = useContext(contextData);
-
-  // Load cart from localStorage initially
+  // Load cart from localStorage or fallback to dummy data
   const [cartItems, setCartItems] = useState(() => {
-    return JSON.parse(localStorage.getItem("addtocart")) || [];
+    const stored = JSON.parse(localStorage.getItem("addtocart"));
+    return stored && stored.length ? stored : [dummyProduct];
   });
 
-  // Fetch cart items from API
-  const { data, isLoading, error, refetch } = useFetchData(
-    "cartItems",
-    `/addtocart-list?email=${userData?.email}`
-  );
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  // Update localStorage whenever cartItems changes
   useEffect(() => {
     localStorage.setItem("addtocart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const cartItemsData = Array.isArray(data?.cartItems) ? data.cartItems : [];
-
-  const { mutate: deleteCartItem } = useDeleteData("cartItems");
-
-  // Handler to update quantity from child
   const handleQuantityChange = (id, newQuantity) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -42,30 +31,24 @@ const AddToCart = () => {
     );
   };
 
-  // Handler to remove item
   const handleDelete = (id) => {
-    deleteCartItem(id);
     setCartItems((prev) => prev.filter((item) => item._id !== id));
   };
 
-  // Calculate subtotal based on cartItems state
-  const subtotal = cartItemsData.reduce((sum, item) => {
-    const quantity = item.quantity || 1;
+  const subtotal = cartItems.reduce((sum, item) => {
+    const quantity = Number(item.quantity) || 1;
     const price = typeof item.price === "number" ? item.price : Number(item.price) || 0;
     return sum + price * quantity;
   }, 0);
 
   const total = subtotal;
 
-  if (isLoading) return <p>Loading cart...</p>;
-  if (error) return <p>Error: {error.message}</p>;
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-500 mb-8">
           <span className="text-[#167389]">Cart</span>
-          <ChevronRightIcon className="h-4 w-4 mx-2" />
+          <span className="mx-2">{'>'}</span>
           <span>Checkout</span>
         </div>
 
@@ -73,28 +56,25 @@ const AddToCart = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-6">Your Cart ({cartItemsData.length})</h2>
-
+              <h2 className="text-xl font-semibold mb-6">Your Cart ({cartItems.length})</h2>
               <div className="divide-y divide-gray-200">
-                {cartItemsData.length === 0 ? (
+                {cartItems.length === 0 ? (
                   <p className="text-gray-500">Your cart is empty.</p>
                 ) : (
-                  cartItemsData.map((item) => (
-                   <CardAddtocart 
-                    item={item}
+                  cartItems.map((item) => (
+                    <CardAddtocart
+                      item={item}
                       quantity={item.quantity || 1}
                       key={item._id}
-                      refetch={refetch}
                       onQuantityChange={handleQuantityChange}
                       onDelete={() => handleDelete(item._id)}
-                      ></CardAddtocart>
+                    />
                   ))
                 )}
               </div>
 
               <div className="mt-6 flex justify-end">
                 <button className="text-[#167389] hover:text-[#135a6e] flex items-center">
-                  <ArrowLeftIcon className="h-5 w-5 mr-1" />
                   Continue Shopping
                 </button>
               </div>
@@ -105,7 +85,6 @@ const AddToCart = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Sub Total</span>

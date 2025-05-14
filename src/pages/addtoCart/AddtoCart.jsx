@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CardAddtocart from "./CardAddtocart";
 import { Link } from "react-router-dom";
+import BuyerInfo from "./BuyerInfo";
 
 // Dummy data to simulate items in localStorage
 const dummyProduct = {
@@ -79,12 +80,19 @@ const AddToCart = () => {
                   Continue Shopping
                 </Link>
               </div>
+
+
+
             </div>
           </div>
 
+
+
+
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
+
+            <div className="bg-white rounded-lg shadow-md p-6 mb-10">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
               <div className="space-y-4">
                 <div className="flex justify-between">
@@ -111,7 +119,10 @@ const AddToCart = () => {
 
            
             </div>
+<BuyerInfo></BuyerInfo>
           </div>
+
+
         </div>
       </div>
     </div>

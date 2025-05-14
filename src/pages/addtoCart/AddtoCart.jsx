@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CardAddtocart from "./CardAddtocart";
+import { Link } from "react-router-dom";
 
 // Dummy data to simulate items in localStorage
 const dummyProduct = {
@@ -74,9 +75,9 @@ const AddToCart = () => {
               </div>
 
               <div className="mt-6 flex justify-end">
-                <button className="text-[#167389] hover:text-[#135a6e] flex items-center">
+                <Link to="/" className="text-[#167389] hover:text-[#135a6e] flex items-center">
                   Continue Shopping
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -108,19 +109,7 @@ const AddToCart = () => {
                 </button>
               </div>
 
-              <div className="mt-8">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Have a Coupon?</h3>
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="Coupon Code"
-                    className="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#167389] focus:border-[#167389]"
-                  />
-                  <button className="bg-[#167389] hover:bg-[#135a6e] text-white px-4 py-2 rounded-r-md">
-                    Apply
-                  </button>
-                </div>
-              </div>
+           
             </div>
           </div>
         </div>

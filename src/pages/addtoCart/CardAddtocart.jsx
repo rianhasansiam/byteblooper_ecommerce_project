@@ -89,3 +89,4 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
 };
 
 export default CardAddtocart;
+

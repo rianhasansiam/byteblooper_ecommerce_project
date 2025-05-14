@@ -84,14 +84,17 @@ const Root = createBrowserRouter([
         path: '/brands',
         element: <Brands></Brands>
       },
-       {
+      
+      
+      
+    ]
+   },
+    {
         path: '/addto-cart',
         element: <AddToCart></AddToCart>
       },
       
-      
-    ]
-   }
+    
 ]
 );
 

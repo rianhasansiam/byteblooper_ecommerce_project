@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-
   const [searchQuery, setSearchQuery] = useState('');
- 
+  const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    // Function to update cart count
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem('addtocart')) || [];
+      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      setCartCount(totalItems);
+    };
+
+    // Initial update
+    updateCartCount();
+
+    // Listen for storage changes
+    window.addEventListener('storage', updateCartCount);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+    };
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -13,14 +31,8 @@ const Navbar = () => {
     console.log('Searching for:', searchQuery);
   };
 
-   
-
-
-
-
-  // kaklshdasda
   return (
-  <header className="bg-white  shadow-sm sticky top-0 z-50 ">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           {/* Logo */}
@@ -28,13 +40,15 @@ const Navbar = () => {
             <Link to="/" className="text-3xl font-bold text-gray-800">
               LAM
             </Link>
-    <Link to="/addto-cart" className='block  text-3xl mr-3 lg:hidden'><i className="fa-solid fa-bag-shopping"></i></Link>
+            <Link to="/addto-cart" className='block text-3xl mr-3 lg:hidden relative'>
+              <i className="fa-solid fa-bag-shopping"></i>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
-
-         
-
-  
-
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="flex-1 max-w-2xl mx-4">
@@ -67,17 +81,19 @@ const Navbar = () => {
             </div>
           </form>
 
-     <div className=" hidden  lg:flex gap-8 text-2xl items-center ">
-    {/* <Link to="/"  className='block '><i className="fa-solid fa-heart"></i></Link> */}
-    <Link to="/addto-cart" className='block '><i className="fa-solid fa-bag-shopping"></i></Link>
-  
-</div>
-           
+          <div className="hidden lg:flex gap-8 text-2xl items-center">
+            <Link to="/addto-cart" className='block relative'>
+              <i className="fa-solid fa-bag-shopping"></i>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
-   
+      </div>
     </header>
-
   );
 };
 

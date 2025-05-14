@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar"
 import Navigation from "./components/Navigation"
 
 import Home from "./pages/Home"
+import FooterNavigation from "./components/FooterNavigation"
 
 
 
@@ -15,11 +16,15 @@ function App() {
   return (
     <>
  <Navbar></Navbar>
- <div className="flex">
+ <div className="flex ">
+
+
   <Navigation></Navigation>
+<FooterNavigation></FooterNavigation>
+
   
   
- <Home></Home>
+ <Outlet></Outlet>
   
 
   

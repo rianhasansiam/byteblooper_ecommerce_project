@@ -14,12 +14,12 @@ const Navigation = () => {
   };
 
   return (
-    <div className="w-[18%] h-full bg-white  p-6 overflow-y-auto  sticky top-0 ">
+    <div className="w-[18%] h-full bg-white  p-6 overflow-y-auto  sticky top-0  max-lg:hidden">
       <ul className="space-y-10 text-gray-800  ">
 
 
         <li>
-          <Link to="/" className="block font-medium hover:text-blue-600 transition">All</Link>
+          <Link to="/allProducts" className="block font-medium hover:text-blue-600 transition">All</Link>
         </li>
         <li>
           <Link to="/new-arrivals" className="block font-medium hover:text-blue-600 transition">New Arrivals</Link>

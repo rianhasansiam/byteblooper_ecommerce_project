@@ -34,17 +34,17 @@ const AllProduct = () => {
   }, []);
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
+      <div className=" w-[100%]  mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div className="flex   justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">All Products</h1>
+            <h1 className="text-lg md:text-3xl font-bold text-gray-900">All Products</h1>
             <p className="text-gray-500 mt-2">
               Showing {(currentPage - 1) * productsPerPage + 1}-{Math.min(currentPage * productsPerPage, allProducts.length)} of {allProducts.length} products
             </p>
           </div>
-          <div className="mt-4 md:mt-0 flex items-center space-x-2">
+          <div className="mt-4 md:mt-0 flex max-sm:flex-col items-center space-x-2">
             <span className="text-sm text-gray-700">Sort by:</span>
             <select className="border border-gray-300 rounded-md px-3 py-2 text-sm">
               <option>Featured</option>
@@ -56,7 +56,7 @@ const AllProduct = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2  lg:grid-cols-3 lx:grid-cols-4 gap-6">
           {currentProducts.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">

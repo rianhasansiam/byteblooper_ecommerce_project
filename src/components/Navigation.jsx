@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 const Navigation = () => {
@@ -19,10 +19,10 @@ const Navigation = () => {
 
 
         <li>
-          <Link to="/allProducts" className="block font-medium hover:text-blue-600 transition">All</Link>
+          <NavLink to="/allProducts" className="block font-medium hover:text-blue-600 transition">All</NavLink>
         </li>
         <li>
-          <Link to="/new-arrivals" className="block font-medium hover:text-blue-600 transition">New Arrivals</Link>
+          <NavLink to="/new-arrivals" className="block font-medium hover:text-blue-600 transition">New Arrivals</NavLink>
         </li>
 
         {/* Women Section */}
@@ -40,9 +40,9 @@ const Navigation = () => {
           </button>
           {openMenus.women && (
             <ul className="ml-4 mt-2 space-y-2 text-sm text-gray-600">
-              <li><Link to="/women/clothing" className="hover:text-blue-500">Clothing</Link></li>
-              <li><Link to="/women/accessories" className="hover:text-blue-500">Accessories</Link></li>
-              <li><Link to="/women/footwear" className="hover:text-blue-500">Footwear</Link></li>
+              <li><NavLink to="/women/clothing" className="hover:text-blue-500">Clothing</NavLink></li>
+              <li><NavLink to="/women/accessories" className="hover:text-blue-500">Accessories</NavLink></li>
+              <li><NavLink to="/women/footwear" className="hover:text-blue-500">Footwear</NavLink></li>
             </ul>
           )}
         </li>
@@ -62,9 +62,9 @@ const Navigation = () => {
           </button>
           {openMenus.men && (
             <ul className="ml-4 mt-2 space-y-2 text-sm text-gray-600">
-              <li><Link to="/men/clothing" className="hover:text-blue-500">Clothing</Link></li>
-              <li><Link to="/men/accessories" className="hover:text-blue-500">Accessories</Link></li>
-              <li><Link to="/men/footwear" className="hover:text-blue-500">Footwear</Link></li>
+              <li><NavLink to="/men/clothing" className="hover:text-blue-500">Clothing</NavLink></li>
+              <li><NavLink to="/men/accessories" className="hover:text-blue-500">Accessories</NavLink></li>
+              <li><NavLink to="/men/footwear" className="hover:text-blue-500">Footwear</NavLink></li>
             </ul>
           )}
         </li>
@@ -84,13 +84,13 @@ const Navigation = () => {
           </button>
           {openMenus.kids && (
             <ul className="ml-4 mt-2 space-y-2 text-sm text-gray-600">
-              <li><Link to="/kids/boys" className="hover:text-blue-500">Boys</Link></li>
-              <li><Link to="/kids/girls" className="hover:text-blue-500">Girls</Link></li>
+              <li><NavLink to="/kids/boys" className="hover:text-blue-500">Boys</NavLink></li>
+              <li><NavLink to="/kids/girls" className="hover:text-blue-500">Girls</NavLink></li>
             </ul>
           )}
         </li>
 
-        {/* Static Links */}
+        {/* Static NavLinks */}
         {[
           { label: 'Brands', path: '/brands' },
          
@@ -101,14 +101,14 @@ const Navigation = () => {
         
         ].map((item, idx) => (
           <li key={idx}>
-            <Link to={item.path} className="block font-medium hover:text-blue-600 transition">
+            <NavLink to={item.path} className="block font-medium hover:text-blue-600 transition">
               {item.label}
-            </Link>
+            </NavLink>
           </li>
         ))}
 
         <li>
-          <Link to="/login" className="block font-medium  hover:underline">Sign In</Link>
+          <NavLink to="/login" className="block font-medium  hover:underline">Sign In</NavLink>
         </li>
       </ul>
     </div>

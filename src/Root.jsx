@@ -15,6 +15,7 @@ import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
 import Brands from "./pages/Brands";
 import AddToCart from "./pages/addtoCart/AddtoCart";
+import ProductDetail from "./pages/productDetails/ProductDetail";
 
 
 
@@ -92,6 +93,10 @@ const Root = createBrowserRouter([
     {
         path: '/addto-cart',
         element: <AddToCart></AddToCart>
+      },
+    {
+        path: '/product-detail',
+        element: <ProductDetail></ProductDetail>
       },
       
     

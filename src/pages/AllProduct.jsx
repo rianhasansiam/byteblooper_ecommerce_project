@@ -99,9 +99,9 @@ const AllProduct = () => {
                     <span className="ml-2 text-xs text-gray-500 line-through">${product.originalPrice}</span>
                   )}
                 </div>
-                <button className="mt-3 w-full py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
+                <Link to="/product-detail" className="mt-3 w-full py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors block text-center">
                   View Details
-                </button>
+                </Link>
               </div>
             </div>
           ))}

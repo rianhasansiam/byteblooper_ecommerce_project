@@ -14,7 +14,7 @@ const Navigation = () => {
   };
 
   return (
-    <div className="w-[18%] h-full bg-white  p-6 overflow-y-auto  sticky top-0  max-lg:hidden">
+    <div className="w-[18%] h-full bg-white  p-6 overflow-y-auto  sticky top-20   max-lg:hidden">
       <ul className="space-y-10 text-gray-800  ">
 
 

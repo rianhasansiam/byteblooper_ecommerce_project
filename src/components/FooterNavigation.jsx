@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiHome, FiGrid, FiTag, FiClock, FiUser } from 'react-icons/fi';
 
 const FooterNavigation = () => {
@@ -10,8 +10,34 @@ const FooterNavigation = () => {
     { name: "Account", icon: <FiUser size={20} />, path: "/account" }
   ];
 
+  const [showFooter, setShowFooter] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 10) {
+        setShowFooter(true);
+        setLastScrollY(window.scrollY);
+        return;
+      }
+      if (window.scrollY > lastScrollY) {
+        setShowFooter(false); // scrolling down
+      } else {
+        setShowFooter(true); // scrolling up
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50 lg:hidden">
+    <footer
+      className={`fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50 lg:hidden transition-transform duration-300 ${
+        showFooter ? 'translate-y-0' : 'translate-y-full'
+      }`}
+    >
       <div className="max-w-md mx-auto px-4">
         <nav className="flex justify-between items-center">
           {links.map((link) => (

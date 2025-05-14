@@ -60,28 +60,28 @@ const CategoryBar = () => {
 
 
   return (
-     <div className="relative bg-white py-6 mt-10 px-4 sm:px-6 lg:px-8">
+     <div className="relative bg-white py-6 mt-10 pl-4  lg:px-8">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-gray-900">All Category</h2>
             
             <div className="relative group">
               {/* Carousel container */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className=" flex   overflow-x-auto gap-3 lg:gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-x-visible">
                 {visibleCategories.map((category, index) => (
                   <div 
                     key={`${category.name}-${index}`}
-                    className=" transition-all duration-300 "
+                    className=" shadow-xl min-w-[35vw] sm:min-w-[40vw] md:min-w-0 transition-all duration-300 flex flex-col items-center"
                   >
                     <img 
                       src={category.picture} 
                       alt={category.name}
-                      className=" w-28 h-28 rounded-full mx-auto object-cover" 
+                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full mx-auto object-cover" 
                     />
                     
-    <div className=" text-center   flex flex-col justify-end p-4">
-                      <h3 className="text-black font-semibold text-lg">{category.name}</h3>
-                      <p className="text-black text-sm">{category.description}</p>
-                      <button className="mt-2 self-start text-white border border-white px-3 py-1 text-sm rounded hover:bg-white hover:text-gray-900 transition-colors">
+    <div className="text-center flex flex-col justify-end p-2 md:p-4">
+                      <h3 className="text-black font-semibold lg:text-lg">{category.name}</h3>
+                      <p className="text-black text-xs md:text-sm">{category.description}</p>
+                      <button className="mt-2 self-start  border  px-3 py-1 text-sm rounded hover:bg-white hover:text-gray-900 transition-colors">
                         Shop Now
                       </button>
                     </div>
@@ -96,7 +96,7 @@ const CategoryBar = () => {
               {/* Navigation arrows */}
               <button 
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10 hidden lg:visible"
                 aria-label="Previous slide"
               >
                 <FiChevronLeft className="w-6 h-6 text-gray-700" />
@@ -104,7 +104,7 @@ const CategoryBar = () => {
               
               <button 
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10 hidden lg:visible"
                 aria-label="Next slide"
               >
                 <FiChevronRight className="w-6 h-6 text-gray-700" />

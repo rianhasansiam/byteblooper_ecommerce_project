@@ -51,7 +51,7 @@ const MostPopularProduct = props => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
@@ -65,8 +65,8 @@ const MostPopularProduct = props => {
                 </div>
               </div>
               <div className="mt-4">
-                <h3 className="text-sm text-gray-700 line-clamp-2">{product.name}</h3>
-                <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
+                <h3 className="text-sm text-gray-700 line-clamp-2 h-10">{product.name}</h3>
+                <p className="text-xs text-gray-500 mt-1 ">{product.brand}</p>
                 <div className="mt-2 flex items-center">
                   <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
                   {product.originalPrice && (

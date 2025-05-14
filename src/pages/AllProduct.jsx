@@ -122,35 +122,32 @@ const AllProduct = () => {
                 <button
                   onClick={prevPage}
                   disabled={currentPage === 1}
-                  className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${
-                    currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
-                  }`}
+                  className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
+                    }`}
                 >
                   <span className="sr-only">Previous</span>
                   <FiChevronLeft className="h-5 w-5" aria-hidden="true" />
                 </button>
-                
+
                 {/* Page numbers */}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
                   <button
                     key={number}
                     onClick={() => paginate(number)}
-                    className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                      currentPage === number
-                        ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-                        : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                    }`}
+                    className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${currentPage === number
+                      ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                      : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                      }`}
                   >
                     {number}
                   </button>
                 ))}
-                
+
                 <button
                   onClick={nextPage}
                   disabled={currentPage === totalPages}
-                  className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${
-                    currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
-                  }`}
+                  className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
+                    }`}
                 >
                   <span className="sr-only">Next</span>
                   <FiChevronRight className="h-5 w-5" aria-hidden="true" />

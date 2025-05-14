@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProductCard from '../../components/ProductCard';
 
 const Girls = () => {
-        const products = [
+  const products = [
     {
       id: 1,
       name: "Eian · Eian-SOLENE (EL25-03 A)",
@@ -36,48 +38,38 @@ const Girls = () => {
       image: "https://i.ibb.co/tZPkkGX/day-10-removebg-preview.png"
     }
   ];
+
   return (
-    <section className="py-12  sm:px-6 lg:px-8 bg-white w-[95vw] md:w-[85vw] lg:w-[80%] mx-auto">
-         <div className="max-w-7xl mx-auto">
-           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-             <div>
-               <h1 className="text-3xl font-bold text-gray-900">Girls Colections</h1>
-               
-             </div>
-             
-           </div>
-   
-           <div className="grid grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6">
-             {products.map((product) => (
-               <div key={product.id} className="group relative">
-                 <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
-                   <img
-                     src={product.image}
-                     alt={product.name}
-                     className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                   />
-                   <div className="absolute bottom-40 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                   <Link to="/" className='block'><i className="fa-solid text-white fa-cart-shopping text-2xl"></i></Link>
-                   </div>
-                 </div>
-                 <div className="mt-4">
-                   <h3 className="text-sm text-gray-700 line-clamp-2">{product.name}</h3>
-                   <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
-                   <div className="mt-2 flex items-center">
-                     <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
-                     {product.originalPrice && (
-                       <span className="ml-2 text-xs text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
-                     )}
-                   </div>
-                   <button className="mt-3 w-full py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
-                     View Details
-                   </button>
-                 </div>
-               </div>
-             ))}
-           </div>
-         </div>
-       </section>
+    <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw] md:w-[70%] mx-auto">
+      <ToastContainer />
+      <div className="w-[100%] mx-auto">
+        {/* Section Header */}
+        <div className="flex justify-between items-start md:items-center mb-8">
+          <div>
+            <h1 className="text-lg md:text-3xl font-bold text-gray-900">Girls Collection</h1>
+            <p className="text-gray-500 mt-2">
+              Showing {products.length} products
+            </p>
+          </div>
+          <div className="mt-4 md:mt-0 flex max-sm:flex-col items-center space-x-2">
+            <span className="text-sm text-gray-700">Sort by:</span>
+            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm">
+              <option>Featured</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest Arrivals</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 

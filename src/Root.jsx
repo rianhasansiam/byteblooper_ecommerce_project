@@ -17,14 +17,7 @@ import Brands from "./pages/Brands";
 import AddToCart from "./pages/addtoCart/AddtoCart";
 import ProductDetail from "./pages/productDetails/ProductDetail";
 
-
-
-
-
 const Root = createBrowserRouter([
-
-
-
   {
     path: '/',
     element: <App />,
@@ -49,60 +42,52 @@ const Root = createBrowserRouter([
         path: '/men/clothing',
         element: <MClothing></MClothing>
       },
-       {
+      {
         path: '/men/footwear',
         element: <MFootwear></MFootwear>
       },
-       {
+      {
         path: '/women/accessories',
         element: <WAccessories></WAccessories>
       },
-       {
+      {
         path: '/women/clothing',
         element: <WClothing></WClothing>
       },
-       {
+      {
         path: '/women/footwear',
         element: <WFootwear></WFootwear>
       },
-       {
+      {
         path: '/allProducts',
         element: <AllProduct></AllProduct>
       },
-       {
+      {
         path: '/new-arrivals',
         element: <NewArrivals></NewArrivals>
       },
-       {
+      {
         path: '/orders',
         element: <Orders></Orders>
       },
-       {
+      {
         path: '/wishlist',
         element: <Wishlist></Wishlist>
       },
-       {
+      {
         path: '/brands',
         element: <Brands></Brands>
       },
-      
-      
-      
-    ]
-   },
-    {
+      {
         path: '/addto-cart',
         element: <AddToCart></AddToCart>
       },
-    {
+      {
         path: '/product-detail',
         element: <ProductDetail></ProductDetail>
-      },
-      
-    
-]
-);
-
-
+      }
+    ]
+  }
+]);
 
 export default Root

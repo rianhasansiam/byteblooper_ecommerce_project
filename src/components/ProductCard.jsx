@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ product }) => {
-  // Add to Cart handler
   const handleAddToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem('addtocart')) || [];
     const existingIndex = cart.findIndex((item) => item.id === product.id);

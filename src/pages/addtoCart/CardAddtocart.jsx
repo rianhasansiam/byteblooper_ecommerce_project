@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
+const CardAddtocart = ({ item, quantity, handleQuantityChange, onDelete }) => {
   const [productQuantities, setProductQuantities] = useState(quantity || 1);
-
+console.log(productQuantities)
   useEffect(() => {
     setProductQuantities(quantity || 1);
   }, [quantity]);
 
-  const increasingQuantity = () => {
+  const increaseQuantity = () => {
     setProductQuantities((prev) => prev + 1);
   };
 
-  const decreasingQuantity = () => {
+  const decreaseQuantity = () => {
     setProductQuantities((prev) => Math.max(1, prev - 1));
   };
 
-  // Notify parent about quantity change
   useEffect(() => {
-    if (onQuantityChange && item?._id) {
-      onQuantityChange(item._id, productQuantities);
+    // Only call handleQuantityChange when the quantity has been updated
+    if (productQuantities !== quantity && item?._id && handleQuantityChange) {
+      handleQuantityChange(item.id, productQuantities);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productQuantities]);
+  }, [productQuantities, quantity, item?.id, handleQuantityChange]);
 
   return (
     <div className="py-6 flex flex-col sm:flex-row">
@@ -57,11 +56,10 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center mb-4 sm:mb-0">
             <button
-              onClick={decreasingQuantity}
+              onClick={decreaseQuantity}
               className="border border-gray-300 rounded-l-md px-3 py-1"
               type="button"
               disabled={productQuantities <= 1}
-              aria-label="Decrease quantity"
             >
               -
             </button>
@@ -69,10 +67,9 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
               {productQuantities}
             </span>
             <button
-              onClick={increasingQuantity}
+              onClick={increaseQuantity}
               className="border border-gray-300 rounded-r-md px-3 py-1"
               type="button"
-              aria-label="Increase quantity"
             >
               +
             </button>
@@ -89,4 +86,3 @@ const CardAddtocart = ({ item, quantity, onQuantityChange, onDelete }) => {
 };
 
 export default CardAddtocart;
-

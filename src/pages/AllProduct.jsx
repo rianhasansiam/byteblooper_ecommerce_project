@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AllProduct = () => {
   // Sample product data (replace with your actual data)
@@ -33,8 +35,22 @@ const AllProduct = () => {
     setCurrentPage(1);
   }, []);
 
+  // Add to Cart handler
+  const handleAddToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem('addtocart')) || [];
+    const existingIndex = cart.findIndex((item) => item.id === product.id);
+    if (existingIndex !== -1) {
+      cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem('addtocart', JSON.stringify(cart));
+    toast.success('Added to cart!', { position: 'top-right', autoClose: 1500 });
+  };
+
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
+      <ToastContainer />
       <div className=" w-[100%]  mx-auto">
         {/* Section Header */}
         <div className="flex   justify-between items-start md:items-center mb-8">
@@ -65,9 +81,14 @@ const AllProduct = () => {
                   alt={product.name}
                   className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute bottom-40 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Link to="/" className='block'><i className="fa-solid text-white fa-cart-shopping text-2xl"></i></Link>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => handleAddToCart(product)}
+                  className="cursor-pointer absolute bottom-40 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 block"
+                  aria-label="Add to cart"
+                >
+                  <i className="fa-solid text-white fa-cart-shopping text-2xl"></i>
+                </button>
               </div>
               <div className="mt-4">
                 <h3 className="text-sm text-gray-700 line-clamp-2">{product.name}</h3>

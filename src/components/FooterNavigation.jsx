@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiHome, FiClock, FiMenu, FiShoppingBag, FiLogIn } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const FooterNavigation = () => {
   const links = [
@@ -9,7 +10,7 @@ const FooterNavigation = () => {
     { name: "Orders", icon: <FiShoppingBag size={20} />, path: "/orders" },
     { name: "Sign", icon: <FiLogIn size={20} />, path: "/" }
   ];
-
+//  <NavLink to="/allProducts" className="block font-medium hover:text-blue-600 transition">All</NavLink>
   const [showFooter, setShowFooter] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -41,16 +42,16 @@ const FooterNavigation = () => {
       <div className="max-w-md mx-auto px-4">
         <nav className="flex justify-between items-center">
           {links.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.path}
+              to={link.path}
               className="flex flex-col items-center py-3 px-2 text-center text-xs font-medium text-gray-600 hover:text-indigo-600 transition-colors"
             >
               <div className="mb-1">
                 {link.icon}
               </div>
               <span>{link.name}</span>
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

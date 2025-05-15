@@ -36,6 +36,14 @@ const NewArrivals = () => {
       originalPrice: 31.99,
       brand: "Express",
       image: "https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-red-checkered-shirt-fashion-man-posing_158538-4914.jpg?ga=GA1.1.864221037.1741283291&semt=ais_hybrid&w=740"
+    },
+    {
+      id: 5,
+      name: "Casual hahvar | Beige",
+      price: 28.80,
+      originalPrice: 31.99,
+      brand: "Express",
+      image: "https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-red-checkered-shirt-fashion-man-posing_158538-4914.jpg?ga=GA1.1.864221037.1741283291&semt=ais_hybrid&w=740"
     }
   ];
 

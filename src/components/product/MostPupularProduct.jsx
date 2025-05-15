@@ -41,9 +41,9 @@ const MostPopularProduct = () => {
   ];
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="pb-5 px-4 sm:px-6 lg:px-8 bg-white">
       <ToastContainer />
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[97%] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Most Popular</h1>

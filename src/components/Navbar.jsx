@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { CgShoppingBag } from "react-icons/cg";
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [cartCount, setCartCount] = useState(0);
@@ -34,14 +34,14 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           {/* Logo */}
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-3xl font-bold text-gray-800">
+            <Link to="/" className="text-4xl  text-gray-600">
               N&10
             </Link>
             <Link to="/addto-cart" className='block text-3xl mr-3 lg:hidden relative'>
-              <i className="fa-solid fa-bag-shopping"></i>
+            <CgShoppingBag />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}
@@ -51,12 +51,12 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-2xl mx-4">
+          <form onSubmit={handleSearch} className="flex-1 max-w-4xl ">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search fashion..."
-                className="w-full py-2 px-4 pr-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full py-2 px-2 pr-10 border bg-gray-100 border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -83,7 +83,7 @@ const Navbar = () => {
 
           <div className="hidden lg:flex gap-8 text-2xl items-center">
             <Link to="/addto-cart" className='block relative'>
-              <i className="fa-solid fa-bag-shopping"></i>
+            <CgShoppingBag />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}

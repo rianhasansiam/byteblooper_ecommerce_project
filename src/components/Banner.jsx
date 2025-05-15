@@ -7,7 +7,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Banner = () => {
     return (
-        <div className='w-full max-w-screen-xl lg:w-[90%] rounded-2xl overflow-hidden mt-8 mx-auto'>
+        <div className='w-full max-w-screen-xl lg:w-[90%] md:rounded-2xl overflow-hidden md:mt-8 mx-auto'>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -26,8 +26,8 @@ const Banner = () => {
                 className="mySwiper relative"
             >
                 {/* Custom Navigation Buttons (visible on sm and up) */}
-                <div className="custom-prev swiper-button-prev hidden sm:block"></div>
-                <div className="custom-next swiper-button-next hidden sm:block"></div>
+                {/* <div className="custom-prev swiper-button-prev hidden sm:block"></div>
+                <div className="custom-next swiper-button-next hidden sm:block"></div> */}
 
                 {/* Slides */}
                 <SwiperSlide>

@@ -13,12 +13,12 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-   <div className='w-[95vw] mx-auto lg:w-[80%]'>
+   <div className='w-[100vw] mx-auto lg:w-[80%]'>
    
    <Banner></Banner>
    <CategoryBar></CategoryBar>
-  <WomenCategoriesCarousel></WomenCategoriesCarousel>
- <MensFashionCarousel></MensFashionCarousel>
+  {/* <WomenCategoriesCarousel></WomenCategoriesCarousel>
+ <MensFashionCarousel></MensFashionCarousel> */}
  <MostPopularProduct></MostPopularProduct>
 <Link
   to="/allProducts"

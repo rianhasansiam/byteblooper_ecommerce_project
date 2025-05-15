@@ -3,6 +3,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProductFilter from '../components/ProductFilter';
 
 const AllProduct = () => {
   // Sample product data (replace with your actual data)
@@ -47,7 +48,33 @@ const AllProduct = () => {
     localStorage.setItem('addtocart', JSON.stringify(cart));
     toast.success('Added to cart!', { position: 'top-right', autoClose: 1500 });
   };
-console.log(currentProducts)
+
+  const [filters, setFilters] = useState({ color: '', size: '', price: '' });
+
+  const handleFilter = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  const filterProducts = (products) => {
+    return products.filter((product) => {
+      const colorMatch = !filters.color || product.color === filters.color;
+      const sizeMatch = !filters.size || product.size === filters.size;
+      let priceMatch = true;
+      if (filters.price) {
+        const [min, max] = filters.price.split('-');
+        const price = parseFloat(product.price);
+        if (min && price < parseFloat(min)) priceMatch = false;
+        if (max && max !== '' && price > parseFloat(max)) priceMatch = false;
+      }
+      return colorMatch && sizeMatch && priceMatch;
+    });
+  };
+
+  const filteredProducts = filterProducts(allProducts);
+  const currentProductsFiltered = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+console.log(currentProductsFiltered)
+
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
       <ToastContainer />
@@ -60,23 +87,14 @@ console.log(currentProducts)
               Showing {(currentPage - 1) * productsPerPage + 1}-{Math.min(currentPage * productsPerPage, allProducts.length)} of {allProducts.length} products
             </p>
           </div>
-          <div className="mt-4 md:mt-0 flex max-sm:flex-col items-center space-x-2">
-            <span className="text-sm text-gray-700">Sort by:</span>
-            <select className="border border-gray-300 rounded-md px-3 py-2 text-sm">
-              <option>Featured</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest Arrivals</option>
-            </select>
-          </div>
+          
         </div>
 
-
-
+        <ProductFilter onFilter={handleFilter} />
 
         {/* Product Grid */}
         <div className="grid grid-cols-2  lg:grid-cols-3 lx:grid-cols-4 gap-6">
-          {currentProducts.map((product) => (
+          {currentProductsFiltered.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
                 <img
@@ -109,16 +127,6 @@ console.log(currentProducts)
             </div>
           ))}
         </div>
-
-
-
-
-
-
-
-
-
-
 
         {/* Pagination */}
         <div className="mt-12 flex items-center justify-between border-t border-gray-200 pt-6">

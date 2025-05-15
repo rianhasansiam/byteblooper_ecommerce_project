@@ -3,6 +3,20 @@ import { FiShoppingCart, FiTruck, FiRefreshCw, FiChevronLeft } from 'react-icons
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductDetailTabs from './ProductDetailTabs';
+import RelatedProducts from '../../components/RelatedProducts';
+
+const relatedMens = [
+  { name: "Unstitched", image: "https://i.ibb.co/b5Fv87Md/images-1.jpg", description: "Premium fabrics for custom tailoring" },
+  { name: "Men Festive", image: "https://i.ibb.co/b5Fv87Md/images-1.jpg", description: "Elegant outfits for celebrations" },
+  { name: "Men Luxury", image: "https://i.ibb.co/b5Fv87Md/images-1.jpg", description: "High-end premium collections" },
+  { name: "Men Kurta", image: "https://i.ibb.co/b5Fv87Md/images-1.jpg", description: "Traditional and contemporary styles" }
+];
+const relatedWomens = [
+  { name: "Maria B", image: "https://i.ibb.co/rGd6fyR8/images.jpg", description: "M.Basic-Eid Edit Lawn-V2-..." },
+  { name: "Elan", image: "https://i.ibb.co/rGd6fyR8/images.jpg", description: "Elan-Lawn'25" },
+  { name: "Noor By Saadia ...", image: "https://i.ibb.co/rGd6fyR8/images.jpg", description: "NBS Schiffli Laserkari V-2-..." },
+  { name: "Aik Atelier", image: "https://i.ibb.co/rGd6fyR8/images.jpg", description: "RAQS-Lawn V1-25" }
+];
 
 const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState(null);
@@ -203,6 +217,8 @@ const ProductDetail = () => {
       </div>
 
       <ProductDetailTabs />
+      <RelatedProducts title="Related Men's Products" products={relatedMens} />
+      <RelatedProducts title="Related Women's Products" products={relatedWomens} />
     </div>
   );
 };

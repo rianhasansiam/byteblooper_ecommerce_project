@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import RelatedProducts from '../../components/RelatedProducts';
 
 const ProductDetailTabs = () => {
   const [activeTab, setActiveTab] = useState('Description');

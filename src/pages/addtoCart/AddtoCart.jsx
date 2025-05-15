@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardAddtocart from "./CardAddtocart";
 import { Link } from "react-router-dom";
 import BuyerInfo from "./BuyerInfo";
+import ProductFilter from '../../components/ProductFilter';
 
 const AddToCart = () => {
   // Load from localStorage initially
@@ -9,6 +10,9 @@ const AddToCart = () => {
     const stored = JSON.parse(localStorage.getItem("addtocart"));
     return stored && Array.isArray(stored) ? stored : [];
   });
+
+  // City and delivery charge state
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   // Sync cartItems to localStorage when they change
   useEffect(() => {
@@ -37,18 +41,23 @@ const AddToCart = () => {
     return sum + price * quantity;
   }, 0);
 
-  // Total (including future logic like shipping if needed)
-  const total = subtotal;
+  // Total (including delivery charge)
+  const total = subtotal + deliveryCharge;
+
+  // Handler for city change from BuyerInfo
+  const handleCityChange = (city, charge) => {
+    setDeliveryCharge(charge);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center text-sm text-gray-500 mb-8">
+        {/* <div className="flex items-center text-sm text-gray-500 mb-8">
           <span className="text-[#167389]">Cart</span>
           <span className="mx-2">{'>'}</span>
           <span>Checkout</span>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Section */}
@@ -89,7 +98,7 @@ const AddToCart = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium">Free</span>
+                  <span className="font-medium">{deliveryCharge > 0 ? `${deliveryCharge} TK` : 'Select City'}</span>
                 </div>
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between">
@@ -97,14 +106,10 @@ const AddToCart = () => {
                     <span className="font-bold text-lg">${total.toFixed(2)}</span>
                   </div>
                 </div>
-                <button className="w-full bg-[#167389] hover:bg-[#135a6e] text-white py-3 px-4 rounded-md font-medium mt-4">
-                  Proceed to Checkout
-                </button>
+                {/* Pass city change handler to BuyerInfo */}
+                <BuyerInfo onCityChange={handleCityChange} />
               </div>
             </div>
-
-            {/* Buyer Info Component */}
-            <BuyerInfo />
           </div>
         </div>
       </div>

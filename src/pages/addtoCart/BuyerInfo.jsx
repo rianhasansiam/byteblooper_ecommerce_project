@@ -1,18 +1,33 @@
 import { useState } from 'react';
 import { FaPhone, FaUser, FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa';
 
-const BuyerInfo = () => {
+const dhakaDistricts = [
+  'Dhaka North', 'Dhaka South', 'Dhanmondi', 'Gulshan', 'Banani', 'Mirpur', 'Uttara', 'Mohammadpur', 'Badda', 'Tejgaon', 'Motijheel', 'Rampura', 'Khilgaon', 'Shyamoli', 'Wari', 'Jatrabari', 'Savar', 'Keraniganj', 'Demra', 'Pallabi', 'Kafrul', 'Cantonment', 'Adabor', 'Shahbag', 'Lalbag', 'New Market', 'Hazaribagh', 'Kamrangirchar', 'Chawkbazar', 'Dakkhinkhan', 'Uttarkhan', 'Turag', 'Bashundhara', 'Banasree', 'Baridhara', 'Agargaon', 'Shere Bangla Nagar', 'Kalabagan', 'Ramna', 'Paltan', 'Kotwali', 'Gendaria', 'Bangshal', 'Sutrapur', 'Sabujbag', 'Khilkhet', 'Shyampur', 'Kadamtali', 'Dohar', 'Nawabganj', 'Dhamrai'
+];
+const otherDistricts = [
+  'Barisal', 'Barguna', 'Bhola', 'Jhalokati', 'Patuakhali', 'Pirojpur',
+  'Chittagong', 'Bandarban', 'Brahmanbaria', 'Chandpur', 'Comilla', 'Cox\'s Bazar', 'Feni', 'Khagrachari', 'Lakshmipur', 'Noakhali', 'Rangamati',
+  'Dhaka', 'Faridpur', 'Gazipur', 'Gopalganj', 'Jamalpur', 'Kishoreganj', 'Madaripur', 'Manikganj', 'Munshiganj', 'Mymensingh', 'Narayanganj', 'Narsingdi', 'Netrokona', 'Rajbari', 'Shariatpur', 'Sherpur', 'Tangail',
+  'Khulna', 'Bagerhat', 'Chuadanga', 'Jessore', 'Jhenaidah', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira',
+  'Rajshahi', 'Bogra', 'Joypurhat', 'Naogaon', 'Natore', 'Chapai Nawabganj', 'Pabna', 'Sirajganj',
+  'Rangpur', 'Dinajpur', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Thakurgaon',
+  'Sylhet', 'Habiganj', 'Moulvibazar', 'Sunamganj'
+];
+
+const BuyerInfo = ({ onCityChange }) => {
   const [formData, setFormData] = useState({
     phone: '',
     name: '',
     address: '',
-    notes: ''
+    notes: '',
+    city: '',
   });
 
   const [errors, setErrors] = useState({
     phone: '',
     name: '',
-    address: ''
+    address: '',
+    city: '',
   });
 
   const handleChange = (e) => {
@@ -29,6 +44,15 @@ const BuyerInfo = () => {
         [name]: ''
       }));
     }
+    // City change logic
+    if (name === 'city' && onCityChange) {
+      let charge = 120;
+      if (value === 'Inside Dhaka City') charge = 80;
+      else if (value === 'Outside Dhaka City') charge = 120;
+      else if (dhakaDistricts.includes(value)) charge = 80;
+      else charge = 120;
+      onCityChange(value, charge);
+    }
   };
 
   const validateForm = () => {
@@ -36,7 +60,8 @@ const BuyerInfo = () => {
     const newErrors = {
       phone: '',
       name: '',
-      address: ''
+      address: '',
+      city: '',
     };
 
     if (!formData.phone.trim()) {
@@ -57,6 +82,11 @@ const BuyerInfo = () => {
       valid = false;
     }
 
+    if (!formData.city) {
+      newErrors.city = 'City is required';
+      valid = false;
+    }
+
     setErrors(newErrors);
     return valid;
   };
@@ -71,7 +101,7 @@ const BuyerInfo = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-xl">
+    <div className="max-w-md mx-auto p-2 ">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Buyer Information</h2>
       
       <form onSubmit={handleSubmit}>
@@ -112,6 +142,36 @@ const BuyerInfo = () => {
         </div>
 
         <div className="mb-4">
+          <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+            <FaMapMarkerAlt className="mr-2 text-gray-500" /> Select City *
+          </label>
+          <select
+            id="city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+              errors.city ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'
+            }`}
+          >
+            <option value="">Select your city</option>
+            <option value="Inside Dhaka City">Inside Dhaka City</option>
+            <option value="Outside Dhaka City">Outside Dhaka City</option>
+            <optgroup label="Dhaka Districts">
+              {dhakaDistricts.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </optgroup>
+            <optgroup label="Other Districts">
+              {otherDistricts.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </optgroup>
+          </select>
+          {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
+        </div>
+
+        <div className="mb-4">
           <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
             <FaMapMarkerAlt className="mr-2 text-gray-500" /> Delivery Address *
           </label>
@@ -128,8 +188,6 @@ const BuyerInfo = () => {
           />
           {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
         </div>
-
-      
 
         <div className="mb-4 text-sm text-gray-600">
           <p>By placing your order, you agree to our <a href="/terms" className="text-[#167389] hover:underline">Terms and Conditions</a></p>

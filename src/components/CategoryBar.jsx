@@ -1,129 +1,101 @@
 import React, { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
+const categories = [
+  { name: "Summer ", picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Women Festive Pret', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Women Luxury Pret', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Women Daily', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Modest Wear', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Western', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Girl Eastern', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Girl Western', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+  { name: 'Kids', picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
+];
+
+const DESKTOP_VISIBLE = 7;
+const MOBILE_VISIBLE = 6;
+
 const CategoryBar = () => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [startIdx, setStartIdx] = useState(0);
 
-  const categories = [
-   
-    { 
-      name: "Women", 
-     picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
-    },
-    { 
-      name: "Men", 
-     picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
-    },
-    { 
-      name: "Kids", 
-    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
-    },
-    { 
-      name: "Boys", 
-    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
-    },
-    { 
-      name: "Girls", 
-    picture: "https://i.ibb.co/rGd6fyR8/images.jpg"
-    },
-    
-  ];
+  // Responsive: show 7 on desktop, 5 on mobile/tablet
+  const getVisibleCount = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 1024) return MOBILE_VISIBLE; // lg breakpoint
+      return DESKTOP_VISIBLE;
+    }
+    return DESKTOP_VISIBLE;
+  };
 
-   
- 
-   const [currentIndex, setCurrentIndex] = useState(0);
-   const itemsPerPage = 4; // Show 4 items at a time
- 
-   const nextSlide = () => {
-     setCurrentIndex((prevIndex) => 
-       prevIndex + itemsPerPage >= categories.length ? 0 : prevIndex + 1
-     );
-   };
- 
-   const prevSlide = () => {
-     setCurrentIndex((prevIndex) => 
-       prevIndex === 0 ? categories.length - itemsPerPage : prevIndex - 1
-     );
-   };
- 
-   // Get current items to display
-   const visibleCategories = categories.slice(
-     currentIndex, 
-     Math.min(currentIndex + itemsPerPage, categories.length)
-   );
- 
-   // If we're at the end and don't have enough items, take from beginning
-   const remainingItems = itemsPerPage - visibleCategories.length;
-   if (remainingItems > 0) {
-     visibleCategories.push(...categories.slice(0, remainingItems));
-   }
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
 
+  React.useEffect(() => {
+    const handleResize = () => setVisibleCount(getVisibleCount());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const endIdx = startIdx + visibleCount;
+  let visibleCategories = categories.slice(startIdx, endIdx);
+  // If at the end, wrap around
+  if (visibleCategories.length < visibleCount) {
+    visibleCategories = visibleCategories.concat(categories.slice(0, visibleCount - visibleCategories.length));
+  }
+
+  const canGoLeft = categories.length > visibleCount;
+  const canGoRight = categories.length > visibleCount;
+
+  const prevSlide = () => {
+    setStartIdx((prev) => (prev - 1 + categories.length) % categories.length);
+  };
+  const nextSlide = () => {
+    setStartIdx((prev) => (prev + 1) % categories.length);
+  };
 
   return (
-     <div className="relative bg-white py-6 mt-10 pl-4  lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-gray-900">All Category</h2>
-            
-            <div className="relative group">
-              {/* Carousel container */}
-              <div className=" flex   overflow-x-auto gap-3 lg:gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-x-visible">
-                {visibleCategories.map((category, index) => (
-                  <div 
-                    key={`${category.name}-${index}`}
-                    className=" shadow-xl min-w-[35vw] sm:min-w-[40vw] md:min-w-0 transition-all duration-300 flex flex-col items-center"
+    <div className="w-full bg-white py-6 mt-2">
+      <div className="w-full lg:w-[100%] mx-auto">
+        <div className="flex justify-center items-center gap-2 sm:gap-4 lg:gap-8 relative select-none">
+          {visibleCategories.map((cat, idx) => (
+            <div key={cat.name + idx} className="flex flex-col items-center w-[70px] sm:w-[100px]">
+              <div className="relative flex items-center justify-center">
+                {/* Left Arrow Overlay */}
+                {idx === 0 && canGoLeft && (
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full border border-gray-300 p-1 shadow-sm hover:bg-gray-100"
+                    style={{ transform: 'translate(-50%, -50%)' }}
+                    aria-label="Previous"
                   >
-                    <img 
-                      src={category.picture} 
-                      alt={category.name}
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full mx-auto object-cover" 
-                    />
-                    
-    <div className="text-center flex flex-col justify-end p-2 md:p-4">
-                      <h3 className="text-black font-semibold lg:text-lg">{category.name}</h3>
-                      <p className="text-black text-xs md:text-sm">{category.description}</p>
-                      <button className="mt-2 self-start  border  px-3 py-1 text-sm rounded hover:bg-white hover:text-gray-900 transition-colors">
-                        Shop Now
-                      </button>
-                    </div>
-    
-                  </div>
-                  
-    
-    
-                ))}
-              </div>
-    
-              {/* Navigation arrows */}
-              <button 
-                onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10 hidden lg:visible"
-                aria-label="Previous slide"
-              >
-                <FiChevronLeft className="w-6 h-6 text-gray-700" />
-              </button>
-              
-              <button 
-                onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10 hidden lg:visible"
-                aria-label="Next slide"
-              >
-                <FiChevronRight className="w-6 h-6 text-gray-700" />
-              </button>
-            </div>
-    
-            {/* Dots indicator (optional) */}
-            {/* <div className="flex justify-center mt-6 space-x-2">
-              {Array.from({ length: Math.ceil(categories.length / itemsPerPage) }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index * itemsPerPage)}
-                  className={`w-3 h-3 rounded-full ${currentIndex >= index * itemsPerPage && currentIndex < (index + 1) * itemsPerPage ? 'bg-gray-800' : 'bg-gray-300'}`}
-                  aria-label={`Go to slide ${index + 1}`}
+                    <FiChevronLeft className="w-5 h-5 text-gray-700" />
+                  </button>
+                )}
+                {/* Right Arrow Overlay */}
+                {idx === visibleCategories.length - 1 && canGoRight && (
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full border border-gray-300 p-1 shadow-sm hover:bg-gray-100"
+                    style={{ transform: 'translate(50%, -50%)' }}
+                    aria-label="Next"
+                  >
+                    <FiChevronRight className="w-5 h-5 text-gray-700" />
+                  </button>
+                )}
+                <img
+                  src={cat.picture}
+                  alt={cat.name}
+                  className="w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] rounded-full border border-gray-300 object-cover bg-white"
                 />
-              ))}
-            </div> */}
-          </div>
+              </div>
+              <div className="text-center mt-2 text-xs sm:text-base font-medium leading-tight break-words h-[2.7em] flex items-center justify-center">
+                {cat.name}
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
+    </div>
   );
 };
 

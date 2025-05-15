@@ -3,17 +3,19 @@ import App from "./App";
 import Home from "./pages/Home";
 import Boys from "./pages/kids/Boys";
 import Girls from "./pages/kids/Girls";
-import MAccessories from "./pages/Men/MAccessories";
-import MClothing from "./pages/Men/MClothing";
-import MFootwear from "./pages/Men/MFootwear";
-import WAccessories from "./pages/Women/WAccessories";
-import WClothing from "./pages/Women/WClothing";
+
+import MClothing from "./pages/men/MClothing";
+import MFootwear from "./pages/men/MFootwear";
+import WAccessories from "./pages/women/WAccessories";
+import WClothing from "./pages/women/WClothing";
 import WFootwear from "./pages/women/WFootwear";
 import AllProduct from "./pages/AllProduct";
 import NewArrivals from "./pages/NewArrivals";
 import Orders from "./pages/Orders";
 import AddToCart from "./pages/addtoCart/AddtoCart";
 import ProductDetail from "./pages/productDetails/ProductDetail";
+import MAccessories from "./pages/men/MAccessories";
+
 
 const Root = createBrowserRouter([
   {

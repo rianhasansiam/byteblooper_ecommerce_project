@@ -8,4 +8,4 @@ const MAccessories = () => {
   )
 }
 
-export default MAccessories
+export default MAccessories;

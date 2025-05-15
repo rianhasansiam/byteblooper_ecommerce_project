@@ -47,7 +47,7 @@ const AllProduct = () => {
     localStorage.setItem('addtocart', JSON.stringify(cart));
     toast.success('Added to cart!', { position: 'top-right', autoClose: 1500 });
   };
-
+console.log(currentProducts)
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
       <ToastContainer />
@@ -55,7 +55,7 @@ const AllProduct = () => {
         {/* Section Header */}
         <div className="flex   justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="text-lg md:text-3xl font-bold text-gray-900">All Products</h1>
+            <h1 className="text-lg md:text-3xl font-semibold text-gray-900">All Products</h1>
             <p className="text-gray-500 mt-2">
               Showing {(currentPage - 1) * productsPerPage + 1}-{Math.min(currentPage * productsPerPage, allProducts.length)} of {allProducts.length} products
             </p>
@@ -70,6 +70,9 @@ const AllProduct = () => {
             </select>
           </div>
         </div>
+
+
+
 
         {/* Product Grid */}
         <div className="grid grid-cols-2  lg:grid-cols-3 lx:grid-cols-4 gap-6">
@@ -91,12 +94,12 @@ const AllProduct = () => {
                 </button>
               </div>
               <div className="mt-4">
-                <h3 className="text-sm text-gray-700 line-clamp-2">{product.name}</h3>
-                <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
+                <h3 className="text-sm  line-clamp-2">{product.name}</h3>
+                <p className="text-xs font-light  mt-1">{product.brand}</p>
                 <div className="mt-2 flex items-center">
-                  <span className="font-medium text-gray-900">${product.price}</span>
+                  <span className={product.originalPrice?"font-medium text-red-500":"font-medium "}>${product.price}</span>
                   {product.originalPrice && (
-                    <span className="ml-2 text-xs text-gray-500 line-through">${product.originalPrice}</span>
+                    <span className="ml-2 text-xs  line-through">${product.originalPrice}</span>
                   )}
                 </div>
                 <Link to="/product-detail" className="mt-3 w-full py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors block text-center">
@@ -106,6 +109,16 @@ const AllProduct = () => {
             </div>
           ))}
         </div>
+
+
+
+
+
+
+
+
+
+
 
         {/* Pagination */}
         <div className="mt-12 flex items-center justify-between border-t border-gray-200 pt-6">

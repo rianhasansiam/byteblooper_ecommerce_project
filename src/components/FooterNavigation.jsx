@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { FiHome, FiGrid, FiTag, FiClock, FiUser } from 'react-icons/fi';
+import { FiHome, FiClock, FiMenu, FiShoppingBag, FiLogIn } from 'react-icons/fi';
 
 const FooterNavigation = () => {
   const links = [
     { name: "Home", icon: <FiHome size={20} />, path: "/" },
-    { name: "Categories", icon: <FiGrid size={20} />, path: "/categories" },
-    { name: "Brands", icon: <FiTag size={20} />, path: "/brands" },
+    { name: "All", icon: <FiMenu size={20} />, path: "/allProducts" },
     { name: "New Arrivals", icon: <FiClock size={20} />, path: "/new-arrivals" },
-    { name: "Account", icon: <FiUser size={20} />, path: "/account" }
+    { name: "Orders", icon: <FiShoppingBag size={20} />, path: "/orders" },
+    { name: "Sign", icon: <FiLogIn size={20} />, path: "/" }
   ];
 
   const [showFooter, setShowFooter] = useState(true);

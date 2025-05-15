@@ -34,13 +34,13 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="mt-4 flex flex-col flex-grow">
         <div className="h-10">
-          <h3 className="text-sm text-gray-700 line-clamp-2">{product.name}</h3>
+          <h3 className="text-sm  line-clamp-2">{product.name}</h3>
         </div>
-        <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
+        <p className="text-xs  mt-1">{product.brand}</p>
         <div className="mt-2 flex items-center">
-          <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
+          <span className={product.originalPrice?"font-medium text-red-500":"font-medium "}>${product.price.toFixed(2)}</span>
           {product.originalPrice && (
-            <span className="ml-2 text-xs text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
+            <span className="ml-2 text-xs  line-through">${product.originalPrice.toFixed(2)}</span>
           )}
         </div>
         <Link to="/product-detail" className="mt-3 w-full py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors block text-center">

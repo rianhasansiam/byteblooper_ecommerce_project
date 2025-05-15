@@ -39,7 +39,7 @@ const NewArrivals = () => {
     },
     {
       id: 5,
-      name: "Casual hahvar | Beige",
+      name: "Casual hahvar | Areige",
       price: 28.80,
       originalPrice: 31.99,
       brand: "Express",

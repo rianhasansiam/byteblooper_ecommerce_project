@@ -38,7 +38,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center justify-between">
             <Link to="/" className="text-3xl font-bold text-gray-800">
-              LAM
+              N&10
             </Link>
             <Link to="/addto-cart" className='block text-3xl mr-3 lg:hidden relative'>
               <i className="fa-solid fa-bag-shopping"></i>

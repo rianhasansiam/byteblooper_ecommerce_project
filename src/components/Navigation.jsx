@@ -92,12 +92,10 @@ const Navigation = () => {
 
         {/* Static NavLinks */}
         {[
-          { label: 'Brands', path: '/brands' },
+         
          
           { label: 'Orders', path: '/orders' },
-      
-          { label: 'Wishlist', path: '/wishlist' },
-   
+         
         
         ].map((item, idx) => (
           <li key={idx}>

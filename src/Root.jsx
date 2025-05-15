@@ -12,8 +12,6 @@ import WFootwear from "./pages/women/WFootwear";
 import AllProduct from "./pages/AllProduct";
 import NewArrivals from "./pages/NewArrivals";
 import Orders from "./pages/Orders";
-import Wishlist from "./pages/Wishlist";
-import Brands from "./pages/Brands";
 import AddToCart from "./pages/addtoCart/AddtoCart";
 import ProductDetail from "./pages/productDetails/ProductDetail";
 
@@ -69,14 +67,6 @@ const Root = createBrowserRouter([
       {
         path: '/orders',
         element: <Orders></Orders>
-      },
-      {
-        path: '/wishlist',
-        element: <Wishlist></Wishlist>
-      },
-      {
-        path: '/brands',
-        element: <Brands></Brands>
       },
       {
         path: '/addto-cart',

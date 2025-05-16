@@ -65,7 +65,7 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-4xl ">
+          <form onSubmit={handleSearch} className="flex-1 max-w-[61rem] ">
             <div className="relative">
               <input
                 type="text"

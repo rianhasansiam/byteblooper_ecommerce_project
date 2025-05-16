@@ -40,7 +40,7 @@ const Boys = () => {
   ];
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw] md:w-[70%] mx-auto">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw] md:w-[100%] mx-auto">
       <ToastContainer />
       <div className="w-[100%] mx-auto">
         {/* Section Header */}
@@ -63,7 +63,7 @@ const Boys = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

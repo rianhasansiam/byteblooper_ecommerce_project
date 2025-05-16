@@ -24,7 +24,7 @@ const ProductFilter = ({ onFilter }) => {
   };
 
   return (
-    <div className="rounded-lg shadow-md p-2 sm:p-4 mb-4 flex flex-row gap-2 sm:gap-4 items-center w-full max-w-4xl mx-auto">
+    <div className="rounded-lg shadow-md p-2 sm:p-4 mb-4 flex flex-row gap-2 sm:gap-4 items-center w-full max-w-7xl mx-auto">
       <div className="flex-1">
         <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Color</label>
         <select

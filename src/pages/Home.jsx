@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-   <div className='w-[100vw] md:mx-auto lg:w-[80%]'>
+   <div className='w-[100vw] md:mx-auto lg:w-[100%]'>
    
    <Banner></Banner>
    <CategoryBar></CategoryBar>

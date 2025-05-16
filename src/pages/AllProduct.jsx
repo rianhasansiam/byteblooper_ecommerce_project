@@ -76,7 +76,7 @@ const AllProduct = () => {
 console.log(currentProductsFiltered)
 
   return (
-    <section className="py-5 lg:py-10 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
+    <section className="py-5 lg:py-10 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[100%] mx-auto ">
       <ToastContainer />
       <div className=" w-[100%]  mx-auto">
         {/* Section Header */}
@@ -93,7 +93,7 @@ console.log(currentProductsFiltered)
         <ProductFilter onFilter={handleFilter} />
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2  lg:grid-cols-3 lx:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2  lg:grid-cols-4 gap-6">
           {currentProductsFiltered.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">

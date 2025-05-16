@@ -11,7 +11,7 @@ function App() {
     <Navbar />
       <div className="flex min-h-screen">
         <Navigation />
-        <div className="flex-1">
+        <div className="flex-1 max-w-7xl mx-auto">
           <Outlet />
         </div>
         <FooterNavigation />

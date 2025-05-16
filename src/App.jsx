@@ -7,8 +7,8 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <>
-      <Navbar />
+   <div className=" overflow-x-hidden">
+    <Navbar />
       <div className="flex min-h-screen">
         <Navigation />
         <div className="flex-1">
@@ -17,7 +17,7 @@ function App() {
         <FooterNavigation />
       </div>
       <ToastContainer />
-    </>
+   </div>
   )
 }
 

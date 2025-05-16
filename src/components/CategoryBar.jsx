@@ -18,7 +18,7 @@ const categories = [
 
 const CategoryBar = () => {
   return (
-    <div className="w-full bg-white py-6 mt-2 ">
+    <div className="w-full bg-white py-3 mt-2 max-w-screen-xl lg:w-[90%] mx-auto">
       <div className="w-full mx-auto">
         <Swiper
           slidesPerView="auto"

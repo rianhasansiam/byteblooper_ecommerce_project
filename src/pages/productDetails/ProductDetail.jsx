@@ -29,11 +29,11 @@ const ProductDetail = () => {
     price: 450,
     currency: "TK",
     features: [
-      "Soft Cotton Lycra Fabric goue",
+      "Soft Cotton  Fabric goue",
       "GSM 175+",
       "Silicon washed",
       "Fabrics Design",
-      "Lightweight, super soft, and breathable"
+      "Lightweight, super soft, and "
     ],
     sizes: ['A', 'B', 'C', 'D'],
     category: "Printed T-Shirt",

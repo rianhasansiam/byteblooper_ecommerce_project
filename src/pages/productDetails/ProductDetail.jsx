@@ -29,7 +29,7 @@ const ProductDetail = () => {
     price: 450,
     currency: "TK",
     features: [
-      "Soft Cotton Lycra Fabric",
+      "Soft Cotton Lycra Fabric goue",
       "GSM 175+",
       "Silicon washed",
       "Fabrics Design",

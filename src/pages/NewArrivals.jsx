@@ -31,7 +31,7 @@ const NewArrivals = () => {
     },
     {
       id: 4,
-      name: "Casual  · Farshi Shahvar | Beige",
+      name: "Casual Layla  · Farshi Shahvar | Beige",
       price: 28.80,
       originalPrice: 31.99,
       brand: "Express",

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CgShoppingBag } from "react-icons/cg";
+
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [cartCount, setCartCount] = useState(0);
@@ -8,20 +9,33 @@ const Navbar = () => {
   useEffect(() => {
     // Function to update cart count
     const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('addtocart')) || [];
-      const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      let cart = [];
+      try {
+        cart = JSON.parse(localStorage.getItem('addtocart'));
+        if (!Array.isArray(cart)) cart = [];
+      } catch (e) {
+        cart = [];
+      }
+      // Defensive: ensure cart is always an array before reduce
+      const totalItems = Array.isArray(cart)
+        ? cart.reduce((total, item) => total + (item.quantity || 1), 0)
+        : 0;
       setCartCount(totalItems);
     };
 
     // Initial update
     updateCartCount();
 
-    // Listen for storage changes
+    // Listen for storage changes (other tabs)
     window.addEventListener('storage', updateCartCount);
+
+    // Listen for custom event (same tab updates)
+    window.addEventListener('cart-updated', updateCartCount);
 
     // Cleanup
     return () => {
       window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('cart-updated', updateCartCount);
     };
   }, []);
 

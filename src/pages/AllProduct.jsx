@@ -76,11 +76,11 @@ const AllProduct = () => {
 console.log(currentProductsFiltered)
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
+    <section className="py-5 lg:py-10 px-4 sm:px-6 lg:px-8 w-[95vw]  md:w-[70%] mx-auto ">
       <ToastContainer />
       <div className=" w-[100%]  mx-auto">
         {/* Section Header */}
-        <div className="flex   justify-between items-start md:items-center mb-8">
+        <div className="flex   justify-between items-start md:items-center mb-4 lg:mb-8 ">
           <div>
             <h1 className="text-lg md:text-3xl font-semibold text-gray-900">All Products</h1>
             <p className="text-gray-500 mt-2">

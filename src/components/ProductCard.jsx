@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
         <button
           type="button"
           onClick={() => handleAddToCart(product)}
-          className="cursor-pointer absolute bottom-40 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 block"
+          className="cursor-pointer absolute bottom-40 right-4 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
           aria-label="Add to cart"
         >
           <i className="fa-solid text-white fa-cart-shopping text-2xl"></i>

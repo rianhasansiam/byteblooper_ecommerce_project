@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useSwipeable } from 'react-swipeable';
 
 const categories = [
   { name: "Summer ", picture: 'https://i.ibb.co/rGd6fyR8/images.jpg' },
@@ -53,10 +54,21 @@ const CategoryBar = () => {
     setStartIdx((prev) => (prev + 1) % categories.length);
   };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (canGoRight) nextSlide();
+    },
+    onSwipedRight: () => {
+      if (canGoLeft) prevSlide();
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
+
   return (
     <div className="w-full bg-white py-6 mt-2">
       <div className="w-full lg:w-[100%] mx-auto">
-        <div className="flex justify-center items-center gap-2 sm:gap-4 lg:gap-8 relative select-none">
+        <div {...handlers} className="flex justify-center items-center gap-2 sm:gap-4 lg:gap-8 relative select-none cursor-grab active:cursor-grabbing">
           {visibleCategories.map((cat, idx) => (
             <div key={cat.name + idx} className="flex flex-col items-center w-[70px] sm:w-[100px]">
               <div className="relative flex items-center justify-center">
